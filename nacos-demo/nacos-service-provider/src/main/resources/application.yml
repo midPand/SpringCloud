@@ -1,0 +1,18 @@
+server:
+  port: 7070
+spring:
+  application:
+    name: nacos-service-provide
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848 #单机
+#      server-addr: 10.10.10.128:8848,10.10.10.129:8848,10.10.10.130:8848 #集群
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: public   #命名空间
+        ephemeral: false    #永久实例 默认为true（临时实例）
+        service: ${spring.application.name}   #默认
+        #weight:   通常要结合权重的负载均衡使用
+
+

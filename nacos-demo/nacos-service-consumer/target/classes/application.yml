@@ -1,0 +1,25 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: nacos-service-consumer   #nacos 会将该名称当做服务名称
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+#      server-addr: 10.10.10.128:8848,10.10.10.129:8848,10.10.10.130:8848
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: public #(命名空间)
+#基于配置的随机策略（局部）
+nacos-service-provider:            #调用的服务的名称
+  ribbon:
+#    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule   #Nacos实现的权重分配
+    NFLoadBalancerRuleClassName: com.ribbon.CustomRule  #自定义负载均衡方法
+ribbon:
+  eager-load:
+    #开启ribbon栏加载
+    enabled: true
+    #配置哪个服务为懒加载 多个用 ， 隔开
+    clients: nacos-service-provide
+
